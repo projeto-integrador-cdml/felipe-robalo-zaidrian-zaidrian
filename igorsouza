@@ -1,0 +1,113 @@
+Explicação sobre o Projeto *Zaidrian
+
+> Zaidrian —  O seu assistente pessoal para organização e foco em projetos. 
+
+##  Minha Ideia Sobre o projeto !!! 💡
+
+ O Zaidrian ajuda aos usuários a planejar, executar e acompanhar os projetos pessoais e profissionais através de tarefas focadas, notificações inteligentes e métricas de produtividade.
+
+* Funcionalidades principais:
+
+1. Criação guiada de projetos: o assistente questiona e ajuda o usuário a definir etapas, metas e prazos.
+
+2. Tarefas de foco: o usuário cria blocos de tempo dedicados ao projeto (pomodoro ou personalizados).
+
+3. Controle de acesso e cobrança:
+
+   * Durante uma tarefa, o usuário pode optar por ativar detecção facial para comprovar a presença.
+   * O usuário pode permitir ou bloquear o  acesso a sites de redes sociais durante a tarefa.
+
+4. Histórico e métricas:
+
+   *  A Duração das tarefas ela é  contabilizada por projeto.
+   * O Resumo de progresso ao final de cada tarefa para autoavaliação.
+
+5. Notificações e lembretes: notificações configuráveis que incentivam a regularidade e a conclusão de etapas.
+
+---
+
+## Tecnologias & Arquitetura 🔧
+
+* **Interface:** Flet (Python) — app desktop/web leve.
+* **Modelo de NLP:** BERT Q&A (Hugging Face) — para interpretação de perguntas e respostas na interface.
+* **Notificações:** Threading (Python) — agendamento e envio local de notificações.
+* **Detecção facial:** OpenCV — captura de vídeo e verificação básica de presença.
+* **Estrutura proposta:**
+
+  * Frontend: Flet
+  * Backend (local ou remoto): API em FastAPI (opcional)
+  * Banco de dados: SQLite (início) — migrável para PostgreSQL
+
+---
+
+## Instalação (exemplo) ⚙️
+
+```bash
+# clonar repositório
+git clone https://github.com/seu-usuario/zaidrian.git
+cd zaidrian
+
+# criar venv e instalar dependências
+python -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+.\.venv\Scripts\activate  # Windows
+
+pip install -r requirements.txt
+```
+
+### Dependências principais
+
+* flet
+* transformers
+* torch (ou outra backend do HF)
+* opencv-python
+* sqlalchemy (se usar DB)
+
+---
+
+## Uso rápido ▶️
+
+1. Ajuste as configurações em `config.yaml` (ex.: caminhos de modelo, webcam, preferências de notificação).
+2. Execute a interface:
+
+```bash
+python app.py
+```
+
+3. Siga o assistente para criar um projeto e iniciar tarefas de foco.
+
+---
+
+## Como funciona a detecção de presença ???
+
+* A aplicação pode capturar frames da webcam e aplicar um classificador simples para identificar se o usuário está presente.
+* Para maior robustez, recomendamos integrar um modelo pré-treinado de reconhecimento facial e armazenar apenas embeddings para comprovação (atenção à privacidade!).
+
+---
+
+## Contribuindo
+
+Contribuições são bem-vindas! Sugestões de como ajudar:
+
+* Abrir issues com bugs ou features
+* Submeter pull requests com melhorias (UI/UX, performance, testes)
+* Melhorar a documentação e exemplos
+
+Siga o fluxo padrão: fork → branch com prefixo `feat/` ou `fix/` → pull request.
+
+
+
+## Time 👥
+
+* Luiz Felipe Nast
+* João Anacleto
+* Igor Souza
+* Thiago Giesel
+
+## Contato**
+
+Para dúvidas e suporte: [Igor.souzas@sempreceub.com , luizfelipenast@sempreceub.com, joao.anacleto@sempreceub.com, thiago.giesel@sempreceub.com]
+
+
+
+*Baseado no README original fornecido pelo time.*
