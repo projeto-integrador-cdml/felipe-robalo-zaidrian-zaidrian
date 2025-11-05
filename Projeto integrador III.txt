@@ -1,0 +1,83 @@
+Bloquear um site no Windows via Python é totalmente possível editando o arquivo hosts do sistema, que é usado para mapear endereços de domínio para IPs.
+
+
+
+
+A ideia é redirecionar o domínio do site que você quer bloquear para o IP local (127.0.0.1), o que faz ele não abrir.    
+
+
+🧠 Conceito:
+
+O arquivo hosts fica aqui: 
+
+Código:
+
+C:\Windows\System32\drivers\etc\hosts
+
+
+Quando o Windows tenta acessar um site, ele primeiro verifica esse arquivo.
+
+
+Se lá estiver, por exemplo: 127.0.0.1   www.instagram.com    (Então o site não abrirá, pois será redirecionado para o próprio computador.)
+
+
+Código Python para bloquear sites:
+
+
+
+import os
+
+# Caminho do arquivo hosts
+hosts_path = r"C:\Windows\System32\drivers\etc\hosts"
+redirect_ip = "127.0.0.1"
+
+# Lista de sites a bloquear
+sites = ["www.instagram.com", "instagram.com", "www.youtube.com"]
+
+# Verifica se o script tem permissão de admin
+if not os.access(hosts_path, os.W_OK):
+    print("⚠️ Execute este script como Administrador!")
+else:
+    with open(hosts_path, 'r+') as file:
+        content = file.read()
+        for site in sites:
+            if site not in content:
+                file.write(f"{redirect_ip} {site}\n")
+                print(f"🔒 Site bloqueado: {site}")
+            else:
+                print(f"✅ Já estava bloqueado: {site}")
+
+
+
+
+
+
+⚙️ Como rodar:
+
+1)Abra o Prompt do Windows como Administrador
+2) Execute o script com:
+
+python bloquear_sites.py
+
+
+🔓 Para desbloquear (remover o bloqueio):
+
+
+hosts_path = r"C:\Windows\System32\drivers\etc\hosts"
+sites = ["www.instagram.com", "instagram.com", "www.youtube.com"]
+
+with open(hosts_path, 'r+') as file:
+    lines = file.readlines()
+    file.seek(0)
+    for line in lines:
+        if not any(site in line for site in sites):
+            file.write(line)
+    file.truncate()
+
+print("🔓 Sites desbloqueados!")
+
+
+
+
+
+
